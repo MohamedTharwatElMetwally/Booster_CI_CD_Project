@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image and Push it to Dockerhub.
+      run: |
+       docker build -f Dockerfile . -t mohamedtharwatalmetwally/jenkins-lab2:Booster.CI.CD.Project
+       docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+       docker push mohamedtharwatalmetwally/jenkins-lab2:Booster.CI.CD.Project
+       
+
+ 
